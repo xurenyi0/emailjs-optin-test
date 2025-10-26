@@ -1,81 +1,102 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* base reset already present in file */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* page baseline */
 body {
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #fafafa; /* fallback if hero image doesn't cover */
+  color: #111;
 }
 
+/* hero - image path retained but add fallback and safer height */
 .hero {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    background: url('../images/office-worker.jpg') center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  width: 100%;
+  background: url('../images/office-worker.jpg') center center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80svh; /* modern safe viewport unit with fallback below */
+  min-height: 80vh;  /* fallback for older browsers */
 }
 
+/* subtle overlay for legibility (unchanged) */
 .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
+/* hero content stacks above overlay */
 .hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 2rem;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
 }
 
+/* main headline - responsive */
 .message {
-    font-size: 2.5rem;
-    text-align: center;
-    color: white;
-    max-width: 800px;
-    margin-bottom: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 2.5rem;
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1.05;
 }
 
+/* CTA button */
 .cta-button {
-    padding: 1.2rem 3rem;
-    font-size: 1.3rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 1.2rem 3rem;
+  font-size: 1.3rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
+.cta-button:hover { background-color: #0056b3; transform: translateY(-2px); }
 
-.cta-button:hover {
-    background-color: #0056b3;
-}
-
+/* footer */
 footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #333;
-    color: white;
+  text-align: center;
+  padding: 1rem;
+  background-color: #222; /* ensure strong contrast */
+  color: #fff;
+}
+.license { font-size: 0.8rem; }
+
+/* accessibility: focus styles */
+:focus-visible {
+  outline: 3px solid rgba(0, 123, 255, 0.24);
+  outline-offset: 2px;
 }
 
-.license {
-    font-size: 0.8rem;
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cta-button { transition: none; transform: none; }
+  .message { transition: none; }
+}
+
+/* responsive adjustments */
+@media (max-width: 720px) {
+  .message { font-size: 1.6rem; padding: 0 1rem; }
+  .cta-button { padding: 0.9rem 2rem; font-size: 1rem; }
+  .hero { min-height: 70svh; min-height: 70vh; }
+}
+
+@media (max-width: 380px) {
+  .message { font-size: 1.25rem; }
+  .cta-button { padding: 0.75rem 1.2rem; }
 }
