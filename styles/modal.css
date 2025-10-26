@@ -1,88 +1,93 @@
+/* modal overlay and modal */
 .modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
+  display: none; /* JS toggles to "flex" when opening */
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Visible helper (toggle this class from JS instead of inline styles) */
+.modal-overlay.is-visible {
+  display: flex;
+}
+
+/* modal panel */
 .modal {
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 400px;
-    animation: modalFadeIn 0.3s ease;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.98);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  width: 92%;
+  max-width: 420px;
+  animation: modalFadeIn 0.28s ease;
+  box-sizing: border-box;
 }
 
+/* animation */
 @keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.modal-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
+/* layout */
+.modal-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-group label { font-weight: 700; color: #222; font-size: 0.95rem; }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.form-group label {
-    font-weight: bold;
-    color: #333;
-}
-
+/* inputs */
 .form-group input {
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* register (submit) button */
 .register-button {
-    padding: 1rem 2rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
+  padding: 0.9rem 1.2rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.18s ease, transform 0.08s ease;
 }
+.register-button:hover { background-color: #0062d6; transform: translateY(-1px); }
 
-.register-button:hover {
-    background-color: #0056b3;
-}
-
+/* close button */
 .close-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #666;
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #444;
+  z-index: 2;
+  padding: 0.25rem;
+  line-height: 1;
+}
+.close-button:hover { color: #222; }
+
+/* focus states for accessibility */
+.form-group input:focus,
+.register-button:focus,
+.close-button:focus {
+  outline: 3px solid rgba(0, 123, 255, 0.16);
+  outline-offset: 2px;
 }
 
-.close-button:hover {
-    color: #333;
+/* responsive tweaks */
+@media (max-width: 380px) {
+  .modal { padding: 1rem; max-width: 360px; }
+  .register-button { font-size: 0.95rem; padding: 0.8rem; }
 }
