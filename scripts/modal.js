@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure you replace PUBLIC_KEY with your actual EmailJS public key if not initialized elsewhere
+  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
   if (typeof emailjs !== 'undefined' && typeof emailjs.init === 'function') {
     emailjs.init('W-SWI_xdav5LAV49d');
   }
@@ -90,3 +91,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
