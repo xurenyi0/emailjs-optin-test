@@ -87,20 +87,22 @@ footer {
 
 /* MODAL OVERLAY & PANEL */
 .modal-overlay {
-  display: none; /* toggle via JS by adding/removing .is-visible */
+  display: none;
   position: fixed;
-  inset: 0;
-  background-color: rgba(0,0,0,0.45);
-  backdrop-filter: blur(4px);
-  z-index: 1000;
-  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay);
   justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
-/* visible state: prefer toggling this class from JS */
 .modal-overlay.is-visible {
   display: flex;
 }
+
 
 /* modal panel */
 .modal {
@@ -205,3 +207,4 @@ footer {
 
 /* Prevent horizontal overflow on small screens */
 html, body { overflow-x: hidden; }
+
